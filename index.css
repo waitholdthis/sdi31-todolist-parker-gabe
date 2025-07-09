@@ -1,5 +1,4 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     display: flex;
@@ -11,8 +10,22 @@ img{
     display: block;
     margin: auto;
 }
-
+.container{
+    display:flex;
+    flex-direction: column;
+}
 #todo-form {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 0px;
+}
+
+#completed-form{
+    margin-top: 0px;
     background: white;
     padding: 25px;
     border-radius: 8px;
@@ -26,9 +39,8 @@ h1 {
     color: #444;
 }
 
-/* Input and Add Button styling */
 #todo-input {
-    width: calc(100% - 85px); /* Full width minus button width */
+    width: calc(100% - 25px);
     padding: 10px;
     border: 2px solid #ddd;
     border-radius: 4px;
@@ -39,6 +51,19 @@ h1 {
     margin-top: 1rem;
     padding: 10px 15px;
     border: none;
+    background-color: blue;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#clearAllBtn {
+    margin-top: 1rem;
+    float: right;
+    margin-right: 2px;
+    padding: 10px 15px;
+    border: none;
     background-color: #f50202;
     color: white;
     border-radius: 4px;
@@ -46,11 +71,14 @@ h1 {
     font-weight: bold;
 }
 
+#clearAllBtn:hover{
+    background-color:#ff4b4b
+}
+
 #Add:hover {
     background-color: #4a54e1;
 }
 
-/* Individual Task Item Styling */
 .task-item {
     display: flex;
     align-items: center;
@@ -59,7 +87,7 @@ h1 {
 }
 
 .task-text {
-    flex-grow: 1; /* Allows text to take up available space */
+    flex-grow: 1; 
     margin: 0 10px;
 }
 
