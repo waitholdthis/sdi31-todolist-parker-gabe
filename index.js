@@ -1,34 +1,98 @@
 // console.log('My code is running');
 // console.log(document.querySelector('#todo-form'));
-var form = document.getElementById("todo-form");
+var pageForm = document.getElementById("todo-form");
 function handleForm(event){event.preventDefault();}
-form.addEventListener('submit', handleForm);
+pageForm.addEventListener('submit', handleForm);
 
 
-function radioAdd() {
-  // 1. Get the form and the element you want to insert before
+const addButton = document.getElementById('Add');
+const taskInput = document.getElementById('todo-input');
+const form = document.getElementById('end');
+
+// // Listen for a click on the 'Add' button
+// addButton.addEventListener('click', () => {
+// // 1. Get the text from the input box and remove extra whitespace
+// const userInput = taskInput.value.trim();
+
+// // 2. Don't add an empty task. If the input is empty, do nothing.
+// if (userInput === '') {
+//     alert('Please enter a task.');
+//     return;
+// }
+
+// // 3. Find the element we want to insert the new task before
+// const referenceElement = document.querySelector('end');
+
+// // 4. Create the new elements for the task
+// const newCheckbox = document.createElement('input');
+// newCheckbox.type = 'checkbox';
+// newCheckbox.id = 'checkbox';
+
+
+// const newLabel = document.createTextNode(` ${userInput} `); // Use the text from the input
+
+
+// const lineBreak1 = document.createElement('br');
+// const lineBreak2 = document.createElement('br');
+
+// // 5. Add the new elements to the form
+// form.insertBefore(newCheckbox, referenceElement);
+// form.insertBefore(newLabel, referenceElement);
+// form.insertBefore(lineBreak1, referenceElement);
+// form.insertBefore(lineBreak2, referenceElement);
+
+
+// // 6. Clear the input box for the next task
+// taskInput.value = '';
+// });
+
+
+
+// This is the updated "Add" button listener
+addButton.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+    if (taskText === '') {
+        alert('Please enter a task.');
+        return;
+    }
+
+    // --- Key Changes Here ---
+    
+    // 1. Create a wrapper div for the entire task
+    const taskWrapper = document.createElement('div');
+    taskWrapper.className = 'task-item';
+
+    // 2. Create the checkbox
+    const newCheckbox = document.createElement('input');
+    newCheckbox.type = 'checkbox';
+
+    // 3. Create the text label using a <span> so it can be styled
+    const newLabel = document.createElement('span');
+    newLabel.textContent = ` ${taskText} `;
+
+    // 4. Append the checkbox and label to the wrapper div
+    taskWrapper.appendChild(newCheckbox);
+    taskWrapper.appendChild(newLabel);
+
+    // 5. Add the new task wrapper to the form
     const form = document.getElementById('todo-form');
-    const referenceElement = document.querySelector('.user-card');
+    const referenceElement = document.getElementById('end');
+    form.insertBefore(taskWrapper, referenceElement);
 
-    // 2. Create the new elements
-    const newRadio = document.createElement('input');
-    newRadio.type = 'radio';
-    newRadio.name = 'example'; // Keep the same name to group them
+    // 6. Clear the input box
+    taskInput.value = '';
+});
 
-    const newLabel = document.createTextNode(' example '); // Create the text label
+// Add this new code to index.js
+const todoForm = document.getElementById('todo-form');
 
-    const newRemoveButton = document.createElement('button');
-    newRemoveButton.type = 'button'; // Use type="button" to avoid form submission
-    newRemoveButton.textContent = 'Remove';
-
-    const lineBreak = document.createElement('br');
-    const doubleLineBreak = document.createElement('br');
-
-
-    // 3. Insert the new elements into the form before the reference element
-    form.insertBefore(newRadio, referenceElement);
-    form.insertBefore(newLabel, referenceElement);
-    form.insertBefore(newRemoveButton, referenceElement);
-    form.insertBefore(lineBreak, referenceElement);
-    form.insertBefore(doubleLineBreak, referenceElement);
-}
+todoForm.addEventListener('click', (event) => {
+    // Check if the element that was clicked is a checkbox
+    if (event.target.type === 'checkbox') {
+        // Find the parent .task-item container of the checkbox
+        const taskItem = event.target.parentElement;
+        
+        // Add or remove the 'completed' class
+        taskItem.classList.toggle('completed');
+    }
+});
